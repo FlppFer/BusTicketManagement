@@ -1,6 +1,5 @@
 package com.FellippoFerreira.BusTicketsManagement.Model;
 
-import com.FellippoFerreira.BusTicketsManagement.DTO.State;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +16,7 @@ public class AvailableTripModel {
 
   private long busTripId;
   private String departureCity;
-  private State departureState;
+  private String departureState;
   private String arrivalCity;
   private String arrivalState;
   private Float totalTripDistance;

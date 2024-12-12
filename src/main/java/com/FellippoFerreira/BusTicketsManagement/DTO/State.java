@@ -1,5 +1,4 @@
 package com.FellippoFerreira.BusTicketsManagement.DTO;
-
 import lombok.Getter;
 
 @Getter

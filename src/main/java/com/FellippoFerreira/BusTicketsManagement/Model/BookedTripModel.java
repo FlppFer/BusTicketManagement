@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "scheduled_trips")
+@Table(name = "booked_trips")
 public class BookedTripModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
