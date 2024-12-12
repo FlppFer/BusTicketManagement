@@ -2,7 +2,7 @@ package com.FellippoFerreira.BusTicketsManagement.Service;
 
 import com.FellippoFerreira.BusTicketsManagement.DTO.AvailableTripDTO;
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookedTripDTO;
-import com.FellippoFerreira.BusTicketsManagement.DTO.TripToBeScheduledDTO;
+import com.FellippoFerreira.BusTicketsManagement.Model.BookRequestDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,14 +12,14 @@ public class TripsService {
     return null;
   }
 
-  public BookedTripDTO scheduleTrip(TripToBeScheduledDTO tripToBeScheduledDTO) {
+  public BookedTripDTO bookTrip(BookRequestDTO bookRequest) {
     return null;
   }
 
-  public BookedTripDTO getActiveTrip(String tripId) {
+  public BookedTripDTO getBookedTrip(String tripId) {
     return null;
   }
 
-  public void cancelTrip(String tripId) {
+  public void cancelBooking(String tripId) {
   }
 }
