@@ -1,3 +1,12 @@
 package com.FellippoFerreira.BusTicketsManagement.Service.payment;
 
-public class Credit {}
+import com.FellippoFerreira.BusTicketsManagement.DTO.BookRequestDTO;
+
+public class Credit implements Payment{
+    public float getTotalPrice(BookRequestDTO bookRequest){
+
+    }
+    public int getTotalInstallments(BookRequestDTO bookRequest){
+
+    }
+}

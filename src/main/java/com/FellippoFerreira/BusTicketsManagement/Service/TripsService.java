@@ -1,9 +1,9 @@
 package com.FellippoFerreira.BusTicketsManagement.Service;
 
 import com.FellippoFerreira.BusTicketsManagement.DTO.AvailableTripDTO;
+import com.FellippoFerreira.BusTicketsManagement.DTO.BookRequestDTO;
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookedTripDTO;
 import com.FellippoFerreira.BusTicketsManagement.Model.AvailableTripModel;
-import com.FellippoFerreira.BusTicketsManagement.Model.BookRequestDTO;
 import com.FellippoFerreira.BusTicketsManagement.Service.repository.TripsRepository;
 import org.springframework.stereotype.Service;
 
