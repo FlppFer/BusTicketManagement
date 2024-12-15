@@ -6,9 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.ZonedDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "booked_trips")
+@Getter
+@Setter
 public class BookedTripModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
