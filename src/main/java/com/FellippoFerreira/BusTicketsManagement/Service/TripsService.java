@@ -9,6 +9,7 @@ import com.FellippoFerreira.BusTicketsManagement.Model.BookedTripModel;
 import com.FellippoFerreira.BusTicketsManagement.Service.payment.PaymentService;
 import com.FellippoFerreira.BusTicketsManagement.Service.repository.BookingRepository;
 import com.FellippoFerreira.BusTicketsManagement.Service.repository.TripsRepository;
+import java.util.Random;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,18 +18,23 @@ public class TripsService {
   private final BookingRepository bookingRepository;
   private final PaymentService paymentService;
 
-  public TripsService(TripsRepository tripsRepository, BookingRepository bookingRepository, PaymentService paymentService) {
+  public TripsService(
+      TripsRepository tripsRepository,
+      BookingRepository bookingRepository,
+      PaymentService paymentService) {
     this.tripsRepository = tripsRepository;
     this.bookingRepository = bookingRepository;
     this.paymentService = paymentService;
   }
 
   public AvailableTripDTO getAvailableTripByArrivalCity(String arrivalCity) {
-    return convertAvailableTripModelToDto(tripsRepository.getAvailableTripByArrivalCity(arrivalCity));
+    return convertAvailableTripModelToDto(
+        tripsRepository.getAvailableTripByArrivalCity(arrivalCity));
   }
 
   public AvailableTripDTO getAvailableTripByDepartureCity(String departureCity) {
-    return convertAvailableTripModelToDto(tripsRepository.getAvailableTripByDepartureCity(departureCity));
+    return convertAvailableTripModelToDto(
+        tripsRepository.getAvailableTripByDepartureCity(departureCity));
   }
 
   public void cancelBooking(String trackingCode) {
@@ -43,11 +49,16 @@ public class TripsService {
     BookedTripDTO bookedTripDTO = createBookedTrip(bookRequest);
     paymentService.setTotalPrice(bookedTripDTO);
     bookingRepository.save(converBookedTripDtoToModel(bookedTripDTO));
-    return new SavedTripDto(bookedTripDTO.getTotalPrice(), bookedTripDTO.getTotalInstallments(), bookedTripDTO.getTrackingCode());
+    return new SavedTripDto(
+        bookedTripDTO.getTotalPrice(),
+        bookedTripDTO.getTotalInstallments(),
+        bookedTripDTO.getTrackingCode());
   }
 
-  private BookedTripDTO createBookedTrip(BookRequestDTO bookRequest){
-    AvailableTripDTO availableTripDTO = convertAvailableTripModelToDto(tripsRepository.getAvailableTripById(bookRequest.getBusTripId()));
+  private BookedTripDTO createBookedTrip(BookRequestDTO bookRequest) {
+    AvailableTripDTO availableTripDTO =
+        convertAvailableTripModelToDto(
+            tripsRepository.getAvailableTripById(bookRequest.getBusTripId()));
     BookedTripDTO bookedTripDTO = new BookedTripDTO();
     bookedTripDTO.setBusTripId(bookRequest.getBusTripId());
     bookedTripDTO.setDepartureCity(availableTripDTO.getDepartureCity());
@@ -67,11 +78,24 @@ public class TripsService {
     return bookedTripDTO;
   }
 
-  private String generateTrackingCode(AvailableTripDTO availableTripDTO){
-    return availableTripDTO.getDepartureState() +  availableTripDTO.getArrivalState();
+  private String generateTrackingCode(AvailableTripDTO availableTripDTO) {
+    return availableTripDTO.getDepartureState() + generateRandomString() + availableTripDTO.getArrivalState();
   }
 
-  private BookedTripModel converBookedTripDtoToModel(BookedTripDTO bookedTripDTO){
+  private String generateRandomString() {
+    final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    final int ID_LENGTH = 4;
+    final Random RANDOM = new Random();
+
+    StringBuilder id = new StringBuilder(ID_LENGTH);
+    for (int i = 0; i < ID_LENGTH; i++) {
+      int index = RANDOM.nextInt(CHARACTERS.length());
+      id.append(CHARACTERS.charAt(index));
+    }
+    return id.toString();
+  }
+
+  private BookedTripModel converBookedTripDtoToModel(BookedTripDTO bookedTripDTO) {
     BookedTripModel bookedTripModel = new BookedTripModel();
     bookedTripModel.setTrackingCode(bookedTripDTO.getTrackingCode());
     bookedTripModel.setBusTripId(bookedTripDTO.getBusTripId());
@@ -92,7 +116,7 @@ public class TripsService {
     return bookedTripModel;
   }
 
-  private BookedTripDTO converBookedTripModelToDto(BookedTripModel bookedTripModel){
+  private BookedTripDTO converBookedTripModelToDto(BookedTripModel bookedTripModel) {
     BookedTripDTO bookedTripDTO = new BookedTripDTO();
     bookedTripDTO.setTrackingCode(bookedTripModel.getTrackingCode());
     bookedTripDTO.setBusTripId(bookedTripModel.getBusTripId());
@@ -113,7 +137,7 @@ public class TripsService {
     return bookedTripDTO;
   }
 
-  private AvailableTripDTO convertAvailableTripModelToDto(AvailableTripModel availableTripModel){
+  private AvailableTripDTO convertAvailableTripModelToDto(AvailableTripModel availableTripModel) {
     AvailableTripDTO availableTripDTO = new AvailableTripDTO();
     availableTripDTO.setBusTripId(availableTripModel.getBusTripId());
     availableTripDTO.setDepartureCity(availableTripModel.getDepartureCity());
