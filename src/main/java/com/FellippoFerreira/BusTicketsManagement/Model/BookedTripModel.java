@@ -28,6 +28,8 @@ public class BookedTripModel {
   private ZonedDateTime arrivalDateTime;
   private float ticketPrice;
   private String paymentType;
+  private int installmentCount;
+  private int passengerCount;
   private int childrenCount;
   private int luggageCount;
 }

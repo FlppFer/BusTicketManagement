@@ -2,6 +2,8 @@ package com.FellippoFerreira.BusTicketsManagement.DTO;
 
 import java.time.ZonedDateTime;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 public class AvailableTripDTO {
@@ -13,7 +15,8 @@ public class AvailableTripDTO {
   private Float totalTripDistance;
   private ZonedDateTime departureDateTime;
   private ZonedDateTime arrivalDateTime;
-  private float ticketPrice;
+  private double ticketPrice;
   private int availableSeats;
   private int maxLuggagePerPassenger;
+  private boolean isInterState;
 }

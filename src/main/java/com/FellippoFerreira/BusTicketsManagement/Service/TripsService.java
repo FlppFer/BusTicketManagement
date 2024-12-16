@@ -4,27 +4,27 @@ import com.FellippoFerreira.BusTicketsManagement.DTO.AvailableTripDTO;
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookRequestDTO;
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookedTripDTO;
 import com.FellippoFerreira.BusTicketsManagement.Model.AvailableTripModel;
-import com.FellippoFerreira.BusTicketsManagement.Service.repository.TripsRepository;
+import com.FellippoFerreira.BusTicketsManagement.Service.repository.BookingRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TripsService {
-  private final TripsRepository tripsRepository;
+  private final BookingRepository bookingRepository;
 
-  public TripsService(TripsRepository tripsRepository) {
-    this.tripsRepository = tripsRepository;
+  public TripsService(BookingRepository bookingRepository) {
+    this.bookingRepository = bookingRepository;
   }
 
   public AvailableTripDTO getAvailableTripByArrival(String arrivalCity) {
-    return tripsRepository.getAvailableTripByArrivalCity(arrivalCity);
+    return convertToDto(bookingRepository.getAvailableTripByArrivalCity(arrivalCity));
   }
 
   public AvailableTripDTO getAvailableTripByDeparture(String departureCity) {
-    return tripsRepository.
+    return convertToDto(bookingRepository.getAvailableTripByArrivalCity(departureCity));
   }
 
   public BookedTripDTO bookTrip(BookRequestDTO bookRequest) {
-    return null;
+
   }
 
   public BookedTripDTO getBookedTrip(String tripId) {
@@ -47,7 +47,8 @@ public class TripsService {
         availableTripModel.getArrivalDateTime(),
         availableTripModel.getTicketPrice(),
         availableTripModel.getAvailableSeats(),
-        availableTripModel.getMaxLuggagePerPassenger()
+        availableTripModel.getMaxLuggagePerPassenger(),
+        availableTripModel.isInterState()
     );
   }
 }

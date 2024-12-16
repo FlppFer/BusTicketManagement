@@ -29,4 +29,5 @@ public class AvailableTripModel {
   private float ticketPrice;
   private int availableSeats;
   private int maxLuggagePerPassenger;
+  private boolean isInterState;
 }
