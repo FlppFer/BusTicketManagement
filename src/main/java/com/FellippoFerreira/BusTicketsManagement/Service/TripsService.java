@@ -10,7 +10,9 @@ import com.FellippoFerreira.BusTicketsManagement.Service.payment.PaymentService;
 import com.FellippoFerreira.BusTicketsManagement.Service.repository.BookingRepository;
 import com.FellippoFerreira.BusTicketsManagement.Service.repository.TripsRepository;
 import java.util.Random;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class TripsService {
@@ -28,27 +30,47 @@ public class TripsService {
   }
 
   public AvailableTripDTO getAvailableTripByArrivalCity(String arrivalCity) {
+    try{
     return convertAvailableTripModelToDto(
         tripsRepository.getAvailableTripByArrivalCity(arrivalCity));
+    }catch (Exception e){
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No trips available for this arrival city");
+    }
   }
 
   public AvailableTripDTO getAvailableTripByDepartureCity(String departureCity) {
+    try{
     return convertAvailableTripModelToDto(
         tripsRepository.getAvailableTripByDepartureCity(departureCity));
+      }catch (Exception e){
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No trips available for this departure city");
+    }
   }
 
   public void cancelBooking(String trackingCode) {
-    bookingRepository.deleteBookingByTrackingCode(trackingCode);
+    try{
+    bookingRepository.deleteBookingByTrackingCode(trackingCode);}
+    catch (Exception e){
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot cancel booking");
+    }
   }
 
   public BookedTripDTO getBookedTripByTrackingId(String trackingId) {
-    return converBookedTripModelToDto(bookingRepository.getBookedTripByTrackingCode(trackingId));
+    try{
+    return converBookedTripModelToDto(bookingRepository.getBookedTripByTrackingCode(trackingId));}
+    catch (Exception e){
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No trips available for this tracking code");
+    }
   }
 
   public SavedTripDto bookTrip(BookRequestDTO bookRequest) {
     BookedTripDTO bookedTripDTO = createBookedTrip(bookRequest);
     paymentService.setTotalPrice(bookedTripDTO);
-    bookingRepository.save(converBookedTripDtoToModel(bookedTripDTO));
+    try{
+    bookingRepository.save(converBookedTripDtoToModel(bookedTripDTO));}
+    catch (Exception e){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot book trip");
+    }
     return new SavedTripDto(
         bookedTripDTO.getTotalPrice(),
         bookedTripDTO.getTotalInstallments(),
