@@ -1,6 +1,7 @@
 package com.FellippoFerreira.BusTicketsManagement.Service.payment.chain;
 
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookRequestDTO;
+import com.FellippoFerreira.BusTicketsManagement.DTO.BookedTripDTO;
 
 public class BasePaymentHandler implements PaymentHandler {
     private PaymentHandler nextHandler;
@@ -11,9 +12,9 @@ public class BasePaymentHandler implements PaymentHandler {
     }
 
     @Override
-    public void handle(BookRequestDTO bookRequest) {
+    public void handle(BookedTripDTO bookedTripDTO) {
         if (nextHandler != null) {
-            nextHandler.handle(bookRequest);
+            nextHandler.handle(bookedTripDTO);
         }
     }
 }

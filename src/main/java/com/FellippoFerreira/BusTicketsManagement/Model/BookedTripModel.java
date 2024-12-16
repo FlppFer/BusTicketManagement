@@ -18,18 +18,20 @@ public class BookedTripModel {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  private String trackingCode;
   private long busTripId;
   private String departureCity;
   private String departureState;
   private String arrivalCity;
   private String arrivalState;
-  private Float totalTripDistance;
+  private double totalDistance;
   private ZonedDateTime departureDateTime;
   private ZonedDateTime arrivalDateTime;
-  private float ticketPrice;
+  private double ticketPrice;
   private String paymentType;
-  private int installmentCount;
+  private int totalInstallments;
   private int passengerCount;
   private int childrenCount;
   private int luggageCount;
+  private double totalPrice;
 }

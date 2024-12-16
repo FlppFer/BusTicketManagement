@@ -2,7 +2,7 @@ package com.FellippoFerreira.BusTicketsManagement.DTO;
 import lombok.Getter;
 
 @Getter
-public class State {
+public class BrazilianStatesDto {
   private static String ac = "Acre";
   private static String al = "Alagoas";
   private static String ap = "Amapá";

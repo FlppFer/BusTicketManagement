@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BookedTripDTO {
+  private String trackingCode;
   private long busTripId;
   private String departureCity;
   private String departureState;
@@ -19,8 +20,9 @@ public class BookedTripDTO {
   private ZonedDateTime arrivalDateTime;
   private double ticketPrice;
   private String paymentType;
-  private int installmentCount;
+  private int totalInstallments;
   private int passengerCount;
   private int childrenCount;
+  private double totalPrice;
   private int luggageCount;
 }

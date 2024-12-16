@@ -9,11 +9,9 @@ import lombok.Setter;
 @Setter
 public class BookRequestDTO {
     private long busTripId;
-    private double totalDistance;
     private String paymentType;
+    private int totalInstallments;
     private int passengerCount;
     private int childrenCount;
     private int luggageCount;
-    private double totalPrice;
-    private int totalInstallments;
 }
