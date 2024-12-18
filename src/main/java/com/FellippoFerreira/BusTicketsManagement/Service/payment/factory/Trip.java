@@ -6,6 +6,7 @@ import com.FellippoFerreira.BusTicketsManagement.DTO.BookRequestDTO;
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookedTripAdapter;
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookedTripDTO;
 import com.FellippoFerreira.BusTicketsManagement.Service.repository.TripsRepository;
+import java.util.Random;
 
 public abstract class Trip {
   protected final TripsRepository tripsRepository;
@@ -14,20 +15,34 @@ public abstract class Trip {
     this.tripsRepository = tripsRepository;
   }
 
-  public abstract BookedTripDTO generateBookedTrip(BookRequestDTO bookRequest);
-
-  abstract void setTotalPrice(BookedTripDTO bookedTripDTO);
-
-  private String generateTrackingCode(BookedTripDTO bookedTripDTO) {
-    return bookedTripDTO.getBusTripId() + "1234" + bookedTripDTO.getBusTripId();
-  }
-
-  protected BookedTripDTO createBookedTrip(BookRequestDTO bookRequest) {
+  public BookedTripDTO createBookedTrip(BookRequestDTO bookRequest) {
     AvailableTripDTO availableTripDTO =
         AvailableTripAdapter.toDTO(
             tripsRepository.getAvailableTripById(bookRequest.getBusTripId()));
     BookedTripDTO bookedTripDTO = BookedTripAdapter.createDto(bookRequest, availableTripDTO);
-    bookedTripDTO.setTrackingCode(generateTrackingCode(bookedTripDTO));
+    setTrackingCode(bookedTripDTO);
+    setTotalPrice(bookedTripDTO);
     return bookedTripDTO;
+  }
+
+  abstract void setTotalPrice(BookedTripDTO bookedTripDTO);
+
+
+  private void setTrackingCode(BookedTripDTO bookedTripDTO) {
+    bookedTripDTO.setTrackingCode(bookedTripDTO.getDepartureCity() + generateRandom4DigitString() + bookedTripDTO.getArrivalCity());
+  }
+
+  private String generateRandom4DigitString() {
+    final int length = 4;
+    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    StringBuilder result = new StringBuilder(length);
+    Random random = new Random();
+
+    for (int i = 0; i < length; i++) {
+      int index = random.nextInt(characters.length());
+      result.append(characters.charAt(index));
+    }
+
+    return result.toString();
   }
 }

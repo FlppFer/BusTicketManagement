@@ -1,6 +1,5 @@
 package com.FellippoFerreira.BusTicketsManagement.Service.payment.factory;
 
-import com.FellippoFerreira.BusTicketsManagement.DTO.BookRequestDTO;
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookedTripDTO;
 import com.FellippoFerreira.BusTicketsManagement.Service.payment.chain.InterstateChildrenDiscountHandler;
 import com.FellippoFerreira.BusTicketsManagement.Service.payment.chain.InterstateTotalPriceHandler;
@@ -10,13 +9,6 @@ public class InterStateTrip extends Trip {
 
   public InterStateTrip(TripsRepository tripsRepository){
     super(tripsRepository);
-  }
-
-  @Override
-  public BookedTripDTO generateBookedTrip(BookRequestDTO bookRequest) {
-    BookedTripDTO bookedTripDTO = createBookedTrip(bookRequest);
-    setTotalPrice(bookedTripDTO);
-    return bookedTripDTO;
   }
 
   @Override

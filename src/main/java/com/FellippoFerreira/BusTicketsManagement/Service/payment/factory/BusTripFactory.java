@@ -1,5 +1,6 @@
 package com.FellippoFerreira.BusTicketsManagement.Service.payment.factory;
 
+import com.FellippoFerreira.BusTicketsManagement.DTO.BookRequestDTO;
 import com.FellippoFerreira.BusTicketsManagement.Service.repository.TripsRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,8 @@ public class BusTripFactory {
     this.tripsRepository = tripsRepository;
   }
 
-  public Trip createBusTrip(String tripType) {
-    if (tripType.equals("interstate")) {
+  public Trip createBusTrip(BookRequestDTO bookRequestDTO) {
+    if (tripsRepository.isInterstateTrip(bookRequestDTO.getBusTripId())) {
       return new InterStateTrip(tripsRepository);
     } else {
       return new IntraStateTrip(tripsRepository);

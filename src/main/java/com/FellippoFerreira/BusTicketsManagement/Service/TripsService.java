@@ -63,8 +63,8 @@ public class TripsService {
   }
 
   public SavedTripDto bookTrip(BookRequestDTO bookRequest) {
-    Trip trip = busTripFactory.createBusTrip(bookRequest.getTripType());
-    BookedTripDTO bookedTripDTO = trip.generateBookedTrip(bookRequest);
+    Trip trip = busTripFactory.createBusTrip(bookRequest);
+    BookedTripDTO bookedTripDTO = trip.createBookedTrip(bookRequest);
     try{
     bookingRepository.save(BookedTripAdapter.toModel(bookedTripDTO));}
     catch (Exception e){
