@@ -1,6 +1,5 @@
 package com.FellippoFerreira.BusTicketsManagement.Service.payment.chain;
 
-import com.FellippoFerreira.BusTicketsManagement.DTO.BookRequestDTO;
 import com.FellippoFerreira.BusTicketsManagement.DTO.BookedTripDTO;
 
 public class IntrastateTotalPriceHandler extends BasePaymentHandler {
