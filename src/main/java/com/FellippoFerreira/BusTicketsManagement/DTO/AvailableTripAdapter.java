@@ -15,7 +15,6 @@ public class AvailableTripAdapter {
         availableTripDTO.setArrivalDateTime(availableTripModel.getArrivalDateTime());
         availableTripDTO.setTicketPrice(availableTripModel.getTicketPrice());
         availableTripDTO.setAvailableSeats(availableTripModel.getAvailableSeats());
-        availableTripDTO.setAvailableSeats(availableTripModel.getAvailableSeats());
         return availableTripDTO;
     }
 }
